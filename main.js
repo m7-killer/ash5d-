@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('ASH Digital Hub Initialized');
-    // test
     // Multi-language support
     const translations = {
         ar: {
