@@ -551,6 +551,7 @@ section {
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 12px;
     overflow: hidden;
+    min-width: 0;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -1344,8 +1345,7 @@ section {
         top: 70px;
         left: 0;
         width: 100%;
-        background: rgba(10, 10, 11, 0.95);
-        backdrop-filter: blur(20px);
+        background: #0A0A0B;
         padding: 1.5rem;
         border-bottom: 2px solid var(--primary);
         z-index: 2000;
@@ -2059,8 +2059,8 @@ section {
     }
 
     .meet-card {
-        padding: 2rem;
-        gap: 2rem;
+        padding: 1.5rem 1rem;
+        gap: 1.5rem;
         grid-template-columns: 1fr;
     }
 
