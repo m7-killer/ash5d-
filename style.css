@@ -59,6 +59,11 @@ body.glitch-3 ::-webkit-scrollbar-thumb {
     box-sizing: border-box;
 }
 
+html {
+    overflow-x: hidden;
+    max-width: 100vw;
+}
+
 body {
     background-color: var(--bg-dark);
     color: var(--text-main);
@@ -120,6 +125,7 @@ header {
     width: 100%;
     height: 2px;
     background: rgba(235, 169, 219, 0.1);
+    overflow: hidden;
 }
 
 .loading-bar::after {
@@ -575,6 +581,7 @@ section {
 
 .clip-card iframe {
     width: 100%;
+    max-width: 100%;
     aspect-ratio: 16 / 9;
     display: block;
 }
