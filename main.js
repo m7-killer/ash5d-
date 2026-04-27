@@ -487,7 +487,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // WEEBOOK AND CHANNEL CONFIG
     const discordWebhookUrl = 'https://discord.com/api/webhooks/1497176661089849505/TQhpStDViMkl20szKdJrqeG9ixPvu7TIv60UF_OYocUGNB1Y_Us2-9FHhV_ZS5dLlnSk';
     const DISCORD_CHANNEL_ID = '1497990868001357825';
-    const DISCORD_BOT_TOKEN = 'MTQ1ODE2NTY3Nzk4NTc2MzQ3NA.GMm2Ng.tHYFVU6lar7PHyOrcsI7AZdp8frZrmBTC_hxps';
+    const DISCORD_BOT_TOKEN = 'MTQ1ODE2NTY3Nzk4NTc2MzQ3NA.G0lWTw.FelIIp7SRo4Qz4tdVhRG5hpr3kjhiyPUQhBevU';
     
     // CORS Proxy for fetching replies (GET only)
     const CORS_PROXY = 'https://corsproxy.io/?url=';
