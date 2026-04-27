@@ -16,6 +16,8 @@
   <div class="scanner-line"></div>
   <div class="grid-overlay"></div>
 
+
+
   <header>
     <div class="nav-container">
       <div class="menu-mobile-btn">
@@ -27,9 +29,11 @@
       <nav id="main-nav">
         <ul class="nav-links">
           <li><a href="#home" class="nav-item active" data-i18n="nav_home">Home</a></li>
+          <li><a href="#about" class="nav-item" data-i18n="nav_about">About</a></li>
+          <li><a href="#news" class="nav-item" data-i18n="nav_news">News</a></li>
           <li><a href="#clips" class="nav-item" data-i18n="nav_clips">Clips</a></li>
           <li><a href="#schedule" class="nav-item" data-i18n="nav_schedule">Schedule</a></li>
-          <li><a href="#about" class="nav-item" data-i18n="nav_about">About</a></li>
+          <li><a href="#commissions" class="nav-item" data-i18n="nav_commissions">Commissions</a></li>
           <li><a href="#fan-art" class="nav-item" data-i18n="nav_fan_art">Fan Art</a></li>
           <li><a href="#credits" class="nav-item" data-i18n="nav_credits">Credits</a></li>
         </ul>
@@ -69,456 +73,540 @@
         <a href="https://www.twitch.tv/ash5d" target="_blank" class="btn-skew btn-primary"><span
             data-i18n="follow_btn">Follow the channel</span></a>
         <div class="status-badge" id="live-status">
+          <svg role="img" viewBox="0 0 24 24" fill="currentColor"
+            style="width: 1.1rem; height: 1.1rem; margin-right: -4px;">
+            <path
+              d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z" />
+          </svg>
+          <div class="status-dot"></div>
+          <span data-i18n="status_offline">Offline</span>
+        </div>
+        <div class="status-badge kick-status" id="kick-live-status">
+          <svg role="img" viewBox="-3 -3 30 30" fill="currentColor"
+            style="width: 1.1rem; height: 1.1rem; margin-right: -4px;">
+            <path
+              d="M1.333 0h8v5.333H12V2.667h2.667V0h8v8H20v2.667h-2.667v2.666H20V16h2.667v8h-8v-2.667H12v-2.666H9.333V24h-8Z" />
+          </svg>
           <div class="status-dot"></div>
           <span data-i18n="status_offline">Offline</span>
         </div>
       </div>
 
       <div class="social-bar">
-        <a href="https://www.twitch.tv/ash5d" target="_blank" rel="noopener noreferrer" class="social-item twitch"><i
-            data-lucide="twitch"></i><span>Twitch</span></a>
+        <a href="https://www.twitch.tv/ash5d" target="_blank" rel="noopener noreferrer" class="social-item twitch"><svg
+            role="img" viewBox="-2 -2 28 28" fill="currentColor" style="width: 1.1rem; height: 1.1rem;">
+            <path
+              d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z" />
+          </svg><span>Twitch</span></a>
+        <a href="https://kick.com/ash5d" target="_blank" rel="noopener noreferrer" class="social-item kick"><svg
+            role="img" viewBox="-3 -3 30 30" fill="currentColor" style="width: 1.1rem; height: 1.1rem;">
+            <path
+              d="M1.333 0h8v5.333H12V2.667h2.667V0h8v8H20v2.667h-2.667v2.666H20V16h2.667v8h-8v-2.667H12v-2.666H9.333V24h-8Z" />
+          </svg><span data-i18n="social_kick">Kick</span></a>
 
-        <a href="https://x.com/ash5D" target="_blank" rel="noopener noreferrer" class="social-item twitter"><i
-            data-lucide="twitter"></i><span>Twitter</span></a>
+        <a href="https://x.com/ash5D" target="_blank" rel="noopener noreferrer" class="social-item twitter"><svg
+            role="img" viewBox="-2 -2 28 28" fill="currentColor" style="width: 1.1rem; height: 1.1rem;">
+            <path
+              d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+          </svg><span>Twitter</span></a>
         <a href="https://www.instagram.com/ash50s?igsh=MWNxdzE1am9jYzczZg==" target="_blank" rel="noopener noreferrer"
-          class="social-item instagram"><i data-lucide="instagram"></i><span>Instagram</span></a>
-        <a href="https://discord.gg/HRFZ7SuSFd" target="_blank" rel="noopener noreferrer" class="social-item discord"><i
-            data-lucide="message-square"></i><span>Discord</span></a>
+          class="social-item instagram"><svg role="img" viewBox="-2 -2 28 28" fill="currentColor"
+            style="width: 1.1rem; height: 1.1rem;">
+            <path
+              d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+          </svg><span>Instagram</span></a>
+        <a href="https://discord.gg/HRFZ7SuSFd" target="_blank" rel="noopener noreferrer"
+          class="social-item discord"><svg role="img" viewBox="-2 -2 28 28" fill="currentColor"
+            style="width: 1.1rem; height: 1.1rem;">
+            <path
+              d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z" />
+          </svg><span>Discord</span></a>
+        <a href="https://www.tiktok.com/@ash50s" target="_blank" rel="noopener noreferrer"
+          class="social-item tiktok"><svg role="img" viewBox="-2 -2 28 28" fill="currentColor"
+            style="width: 1.1rem; height: 1.1rem;">
+            <path
+              d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 2.23-1.13 4.39-2.92 5.72-1.78 1.33-4.09 1.83-6.26 1.41-2.18-.42-4.13-1.68-5.33-3.46-1.2-1.79-1.57-4.11-1.02-6.2.55-2.09 1.94-3.88 3.8-4.88 1.85-.99 4.09-1.16 6.07-.48V13.4c-1.29-.44-2.73-.24-3.86.51-1.13.76-1.87 2.06-2.05 3.4-.18 1.34.2 2.72 1.05 3.75.84 1.03 2.14 1.63 3.5 1.63 1.36 0 2.66-.6 3.5-1.63.85-1.03 1.23-2.41 1.05-3.75-.02-3.86-.01-7.72-.01-11.58.01-1.89.01-3.78.02-5.67z" />
+          </svg><span>TikTok</span></a>
         <a href="https://youtu.be/dQw4w9WgXcQ?si=pYlx6H8mLvBuWTAj" target="_blank" rel="noopener noreferrer"
           class="social-item dont-click"><i data-lucide="alert-triangle"></i><span data-i18n="dont_click_btn">Don't
             Click</span></a>
 
       </div>
-      <!-- Clips Section -->
-      <section id="clips">
-        <h2 class="section-title-big" data-i18n="clips_title">Latest Clips</h2>
-        <div class="clips-grid">
-          <div class="clip-card">
-            <iframe
-              src="https://clips.twitch.tv/embed?clip=SavorySmilingBaconANELE-7SZ3rk0npiOkudrs&parent=ash5d.netlify.app"
-              frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
-          </div>
-          <div class="clip-card">
-            <iframe
-              src="https://clips.twitch.tv/embed?clip=BumblingArtisticWheelKappa-r_j66VQHYj_lgvwT&parent=ash5d.netlify.app"
-              frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
-          </div>
-          <div class="clip-label"><span data-i18n="clip_label_racist">Racist Clip</span></div>
-          <div class="clip-card" id="latest-clip-card">
-            <iframe id="latest-clip-iframe"
-              src="https://clips.twitch.tv/embed?clip=SquareBenevolentReindeerSoBayed-iMQR4wpuwWL6wq5o&parent=ash5d.netlify.app"
-              frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
-          </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+      <div class="meet-card">
+        <div class="meet-text">
+          <h3 data-i18n="about_title">Hello! I'm ASH ✨</h3>
+          <p data-i18n="about_name">My name: ASH</p>
+          <p data-i18n="about_p1">I chose this name because it's blazing, just like how I felt when the VTubing idea
+            came to mind.</p>
+          <p data-i18n="about_p2">I have a strange design, unfamiliar to what exists on Earth, and my fans know me for
+            chaos.</p>
+          <p data-i18n="about_p3">I call my fans "Sparks" - I chose this name because it's the smallest description of
+            a flame.</p>
+          <p data-i18n="about_p4"></p>
+          <p data-i18n="about_p5"></p>
         </div>
-      </section>
-
-      <!-- Schedule Section -->
-      <section id="schedule">
-
-        <h2 class="section-title-big" data-i18n="schedule_title">ASH Stream Schedule</h2>
-        <div class="schedule-grid">
-          <div class="schedule-card">
-            <div class="card-emoji">
-              <img src="ezgif.com-optiwebp.webp"
-                alt="Cute Spark">
-            </div>
-            <div class="day-info">
-              <span>Twitch</span>
-            </div>
-            <h3 class="stream-title" data-i18n="stream_title_drawing">Drawing with friends</h3>
-          </div>
-
-          <div class="schedule-card">
-            <div class="card-emoji">
-              <img src="ezgif.com-optiwebp (1).webp"
-                alt="Gaming Spark">
-            </div>
-            <div class="day-info">
-              <span>Twitch</span>
-            </div>
-            <h3 class="stream-title" data-i18n="stream_title_random">Playing random games</h3>
-          </div>
-
-          <div class="schedule-card">
-            <div class="card-emoji">
-              <img src="https://i.postimg.cc/0NRvCLcV/flora.png" alt="Flora">
-            </div>
-            <div class="day-info">
-              <span>Discord</span>
-            </div>
-            <h3 class="stream-title" data-i18n="stream_title_flora">Stream according to flora's mood</h3>
-          </div>
+        <div class="meet-image">
+          <div class="sparkle sp1" style="top: 10%; left: 10%;"></div>
+          <div class="sparkle sp2" style="top: 20%; right: 5%;"></div>
+          <div class="sparkle sp3" style="bottom: 15%; left: 5%;"></div>
+          <div class="sparkle sp4" style="bottom: 10%; right: 10%;"></div>
+          <div class="sparkle sp5" style="top: 50%; right: -5%;"></div>
+          <div class="sparkle sp1" style="top: 40%; left: -5%; animation-delay: 0.3s;"></div>
+          <div class="sparkle sp2" style="bottom: 40%; right: 0%; animation-delay: 0.8s;"></div>
+          <img src="https://i.postimg.cc/g2dq6KZH/panel-699650139-image-a9cc0c41-1603-4d8c-8856-36dc086fbef6.png"
+            alt="Who is ASH?">
         </div>
-      </section>
+      </div>
 
-      <!-- About Section -->
-      <section id="about">
-        <div class="meet-card">
-          <div class="meet-text">
-            <h3 data-i18n="about_title">Hello! I'm ASH ✨</h3>
-            <p data-i18n="about_name">My name: ASH</p>
-            <p data-i18n="about_p1">I chose this name because it's blazing, just like how I felt when the VTubing idea
-              came to mind.</p>
-            <p data-i18n="about_p2">I have a strange design, unfamiliar to what exists on Earth, and my fans know me for
-              chaos.</p>
-            <p data-i18n="about_p3">I call my fans "Sparks" - I chose this name because it's the smallest description of
-              a flame.</p>
-            <p data-i18n="about_p4"></p>
-            <p data-i18n="about_p5"></p>
-          </div>
-          <div class="meet-image">
-            <div class="sparkle sp1" style="top: 10%; left: 10%;"></div>
-            <div class="sparkle sp2" style="top: 20%; right: 5%;"></div>
-            <div class="sparkle sp3" style="bottom: 15%; left: 5%;"></div>
-            <div class="sparkle sp4" style="bottom: 10%; right: 10%;"></div>
-            <div class="sparkle sp5" style="top: 50%; right: -5%;"></div>
-            <div class="sparkle sp1" style="top: 40%; left: -5%; animation-delay: 0.3s;"></div>
-            <div class="sparkle sp2" style="bottom: 40%; right: 0%; animation-delay: 0.8s;"></div>
-            <img src="https://i.postimg.cc/g2dq6KZH/panel-699650139-image-a9cc0c41-1603-4d8c-8856-36dc086fbef6.png"
-              alt="Who is ASH?">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-value">4.2K</span>
+          <span class="stat-label" data-i18n="stat_followers">FOLLOWERS</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">550</span>
+          <span class="stat-label" data-i18n="stat_streams">STREAMS</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">2,298</span>
+          <span class="stat-label" data-i18n="stat_hours">HOURS LIVE</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" style="color: var(--primary);" data-i18n="stat_active_value">Active</span>
+          <span class="stat-label" data-i18n="stat_community">COMMUNITY</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news">
+      <h2 class="section-title-big" data-i18n="news_title">Latest News</h2>
+      <div class="news-grid">
+
+        <div class="news-card">
+          <div class="news-content">
+            <i data-lucide="instagram" class="news-icon instagram-icon"></i>
+            <h3 data-i18n="news_insta_title">Instagram Reel</h3>
+            <p data-i18n="news_insta_desc">New Instagram posts and reels will automatically appear here when uploaded.
+            </p>
+            <a href="https://www.instagram.com/ash50s?igsh=MWNxdzE1am9jYzczZg==" target="_blank"
+              class="btn-skew btn-primary news-btn">
+              <span data-i18n="news_insta_btn">View on Instagram</span>
+            </a>
           </div>
         </div>
 
-        <div class="stats-grid">
-          <div class="stat-card">
-            <span class="stat-value">4.2K</span>
-            <span class="stat-label" data-i18n="stat_followers">FOLLOWERS</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-value">550</span>
-            <span class="stat-label" data-i18n="stat_streams">STREAMS</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-value">2,298</span>
-            <span class="stat-label" data-i18n="stat_hours">HOURS LIVE</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-value" style="color: var(--primary);" data-i18n="stat_active_value">Active</span>
-            <span class="stat-label" data-i18n="stat_community">COMMUNITY</span>
+        <div class="news-card">
+          <div class="news-content">
+            <svg role="img" viewBox="-2 -2 28 28" fill="currentColor" class="news-icon tiktok-icon">
+              <path
+                d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 2.23-1.13 4.39-2.92 5.72-1.78 1.33-4.09 1.83-6.26 1.41-2.18-.42-4.13-1.68-5.33-3.46-1.2-1.79-1.57-4.11-1.02-6.2.55-2.09 1.94-3.88 3.8-4.88 1.85-.99 4.09-1.16 6.07-.48V13.4c-1.29-.44-2.73-.24-3.86.51-1.13.76-1.87 2.06-2.05 3.4-.18 1.34.2 2.72 1.05 3.75.84 1.03 2.14 1.63 3.5 1.63 1.36 0 2.66-.6 3.5-1.63.85-1.03 1.23-2.41 1.05-3.75-.02-3.86-.01-7.72-.01-11.58.01-1.89.01-3.78.02-5.67z" />
+            </svg>
+            <h3 data-i18n="news_tiktok_title">TikTok Video</h3>
+            <p data-i18n="news_tiktok_desc">New TikTok videos and clips will be showcased directly in this space.</p>
+            <a href="https://www.tiktok.com/@ash50s" target="_blank" class="btn-skew btn-primary news-btn">
+              <span data-i18n="news_tiktok_btn">View on TikTok</span>
+            </a>
           </div>
         </div>
-      </section>
 
-      <!-- Fan Art Section -->
-      <section id="fan-art">
-        <h2 class="section-title-big" data-i18n="fan_art_title">Fan Art</h2>
-        <div class="fan-art-grid">
-          <div class="art-card">
-            <img src="public/fan-art-saz.png" alt="Fan Art by @sazartist">
-            <div class="art-overlay">
-              <div class="art-author-info">
-                <img
-                  src="https://cdn.discordapp.com/avatars/431569701529714698/71a8aeb4a99048ac674e9b89d48bc8be.webp?size=1024"
-                  alt="@sazartist" class="art-author-avatar">
-                <span>By @sazartist</span>
-              </div>
-            </div>
-          </div>
-          <div class="art-card">
-            <img src="public/fan-art-saz-2.jpg" alt="Fan Art by @sazartist">
-            <div class="art-overlay">
-              <div class="art-author-info">
-                <img
-                  src="https://cdn.discordapp.com/avatars/431569701529714698/71a8aeb4a99048ac674e9b89d48bc8be.webp?size=1024"
-                  alt="@sazartist" class="art-author-avatar">
-                <span>By @sazartist</span>
-              </div>
-            </div>
-          </div>
-          <div class="art-card">
-            <img src="public/fan-art-saz-3.png" alt="Fan Art by @sazartist">
-            <div class="art-overlay">
-              <div class="art-author-info">
-                <img
-                  src="https://cdn.discordapp.com/avatars/431569701529714698/71a8aeb4a99048ac674e9b89d48bc8be.webp?size=1024"
-                  alt="@sazartist" class="art-author-avatar">
-                <span>By @sazartist</span>
-              </div>
-            </div>
-          </div>
-          <div class="art-card">
-            <img src="public/fan-art-redzo.png" alt="Fan Art by @1redzo">
-            <div class="art-overlay">
-              <div class="art-author-info">
-                <img
-                  src="https://cdn.discordapp.com/avatars/338583636226080770/ad54fe899049ae470b63c3cc9d11b7c5.webp?size=1024"
-                  alt="@1redzo" class="art-author-avatar">
-                <span>By @1redzo</span>
-              </div>
-            </div>
-          </div>
-          <div class="art-card">
-            <img src="public/fan-art-wyxp.png" alt="Fan Art by @wyxp">
-            <div class="art-overlay">
-              <div class="art-author-info">
-                <img
-                  src="ezgif.com-optimize (1).gif"
-                  alt="@wyxp" class="art-author-avatar">
-                <span>By @wyxp</span>
-              </div>
-            </div>
-          </div>
-          <div class="art-card">
-            <img src="public/fan-art-mkoko.jpg" alt="Fan Art by mko.ko ( Malak )">
-            <div class="art-overlay">
-              <div class="art-author-info">
-                <img
-                  src="https://cdn.discordapp.com/avatars/810388695311056896/70de45f00ed87ee24674b53d57605bb6.webp?size=1024"
-                  alt="mko.ko ( Malak )" class="art-author-avatar">
-                <span>By mko.ko ( Malak )</span>
-              </div>
-            </div>
-          </div>
-          <div class="art-card">
-            <img src="public/fan-art-llzn.png" alt="Fan Art by .llzn9 ( MAR )">
-            <div class="art-overlay">
-              <div class="art-author-info">
-                <img
-                  src="https://cdn.discordapp.com/avatars/928168815659999263/dc6b19a94f5f36477443fb072425a116.webp?size=1024"
-                  alt=".llzn9 ( MAR )" class="art-author-avatar">
-                <span>By .llzn9 ( MAR )</span>
-              </div>
-            </div>
-          </div>
-          <div class="art-card">
-            <img src="public/fan-art-rtx-pizza.png" alt="Fan Art by rtx_pizza">
-            <div class="art-overlay">
-              <div class="art-author-info">
-                <img
-                  src="https://cdn.discordapp.com/avatars/839635094394110003/e512ccfd67a221f2fab817f4e84c6998.webp?size=1024"
-                  alt="rtx_pizza" class="art-author-avatar">
-                <span>By rtx_pizza</span>
-              </div>
-            </div>
-          </div>
-          <div class="art-card">
-            <img src="public/fan-art-yukisilar.png" alt="Fan Art by yukisilar">
-            <div class="art-overlay">
-              <div class="art-author-info">
-                <img
-                  src="https://cdn.discordapp.com/avatars/580697909557854228/119172d9a368dbb0d0c53af09c1e11a0.webp?size=1024"
-                  alt="yukisilar" class="art-author-avatar">
-                <span>By yukisilar</span>
-              </div>
-            </div>
-          </div>
-          <div class="art-card">
-            <img src="public/fan-art-city-sunset.png" alt="Fan Art by sazartist & ii.sun ( SUN )">
-            <div class="art-overlay">
-              <div class="art-author-info">
-                <div class="author-avatars" style="display: flex; align-items: center;">
-                  <img
-                    src="https://cdn.discordapp.com/avatars/431569701529714698/71a8aeb4a99048ac674e9b89d48bc8be.webp?size=1024"
-                    alt="sazartist" class="art-author-avatar">
-                  <img
-                    src="https://cdn.discordapp.com/avatars/424336728799707141/a91fdb8c694a08b377c5cb47299cc45c.webp?size=1024"
-                    alt="ii.sun ( SUN )" class="art-author-avatar" style="margin-left: -15px; border-color: var(--secondary);">
-                </div>
-                <span>By sazartist & ii.sun ( SUN )</span>
-              </div>
-            </div>
-          </div>
-          <div class="art-card">
-            <img src="https://i.postimg.cc/5t7brZGf/image-2026-03-03-021608111.png" alt="Fan Art by @sazartist">
-            <div class="art-overlay">
-              <div class="art-author-info">
-                <img
-                  src="https://cdn.discordapp.com/avatars/431569701529714698/71a8aeb4a99048ac674e9b89d48bc8be.webp?size=1024"
-                  alt="@sazartist" class="art-author-avatar">
-                <span>By @sazartist</span>
-              </div>
-            </div>
-          </div>
-          <div class="art-card">
-            <img src="https://i.postimg.cc/qMSKPFfV/image-2026-03-03-022158113.png" alt="Fan Art by @suppakaizou">
-            <div class="art-overlay">
-              <div class="art-author-info">
-                <img
-                  src="https://cdn.discordapp.com/avatars/603479146424958978/c46c0e0ef7f0fb957581d51ea3aa4124.webp?size=1024"
-                  alt="@suppakaizou" class="art-author-avatar">
-                <span>By @suppakaizou</span>
-              </div>
-            </div>
-          </div>
-          <div class="art-card">
-            <img src="https://i.postimg.cc/Gp7Tjgxg/image-2026-03-03-022624987.png" alt="Fan Art by .fo ( Fno )">
-            <div class="art-overlay">
-              <div class="art-author-info">
-                <img src="https://i.postimg.cc/ZqC5Jb6F/image-2026-03-03-022745387.png" alt=".fo ( Fno )"
-                  class="art-author-avatar">
-                <span>By .fo ( Fno )</span>
-              </div>
-            </div>
-          </div>
-          <div class="art-card">
-            <img src="https://i.postimg.cc/1RM2rpkf/image-2026-03-03-023115405.png" alt="Fan Art by @soilichi (otto)">
-            <div class="art-overlay">
-              <div class="art-author-info">
-                <img
-                  src="https://cdn.discordapp.com/guilds/1204715152851869706/users/576216674207006721/avatars/a_3d7ccc28212c9f4598940123b206678d.gif?size=1024&animated=true"
-                  alt="@soilichi (otto)" class="art-author-avatar">
-                <span>By @soilichi (otto)</span>
-              </div>
-            </div>
-          </div>
-          <div class="art-card">
-            <img src="https://i.postimg.cc/3xwvDHgr/image-2026-03-03-023922044.png" alt="Fan Art by @soilichi (otto)">
-            <div class="art-overlay">
-              <div class="art-author-info">
-                <img
-                  src="https://cdn.discordapp.com/guilds/1204715152851869706/users/576216674207006721/avatars/a_3d7ccc28212c9f4598940123b206678d.gif?size=1024&animated=true"
-                  alt="@soilichi (otto)" class="art-author-avatar">
-                <span>By @soilichi (otto)</span>
-              </div>
-            </div>
-          </div>
-          <div class="art-card">
-            <img src="https://i.postimg.cc/1XH8fWX9/image-2026-03-03-024022178.png" alt="Fan Art by aoki_chan. ( Rem )">
-            <div class="art-overlay">
-              <div class="art-author-info">
-                <img
-                  src="https://cdn.discordapp.com/avatars/454288320302678016/d6c5a1a2b3158c420e66a855bd17a602.webp?size=1024"
-                  alt="aoki_chan. ( Rem )" class="art-author-avatar">
-                <span>By aoki_chan. ( Rem )</span>
-              </div>
-            </div>
-          </div>
-          <div class="art-card">
-            <img src="https://i.postimg.cc/0QGQBtpG/image-2026-03-03-024136406.png" alt="Fan Art by ii.sun ( SUN )">
-            <div class="art-overlay">
-              <div class="art-author-info">
-                <img
-                  src="https://cdn.discordapp.com/avatars/424336728799707141/a91fdb8c694a08b377c5cb47299cc45c.webp?size=1024"
-                  alt="ii.sun ( SUN )" class="art-author-avatar">
-                <span>By ii.sun ( SUN )</span>
-              </div>
-            </div>
-          </div>
-          <div class="art-card">
-            <img src="https://i.postimg.cc/xd1V26V2/image-2026-03-03-024945192.png" alt="Fan Art by kaliopus ( Dinis )">
-            <div class="art-overlay">
-              <div class="art-author-info">
-                <img
-                  src="https://cdn.discordapp.com/avatars/220765417742925824/b6fc42ef4b0aef9183a1168511ba3b85.webp?size=1024"
-                  alt="kaliopus ( Dinis )" class="art-author-avatar">
-                <span>By kaliopus ( Dinis )</span>
-              </div>
-            </div>
-          </div>
-          <div class="art-card">
-            <img src="https://i.postimg.cc/Y05t2YfQ/image-2026-03-03-030002375.png" alt="Fan Art">
-          </div>
-          <div class="art-card">
-            <img src="https://i.postimg.cc/1R2mK1hD/image-2026-03-03-030011587.png" alt="Fan Art">
-          </div>
-          <div class="art-card">
-            <img src="https://i.postimg.cc/HsMpZvd3/image-2026-03-03-030019190.png" alt="Fan Art">
-          </div>
-          <div class="art-card">
-            <img src="https://i.postimg.cc/wjd9S5Bz/image-2026-03-03-030030487.png" alt="Fan Art">
-          </div>
-          <div class="art-card">
-            <img src="https://i.postimg.cc/tgqpgXP3/image-2026-03-03-030046493.png" alt="Fan Art">
-          </div>
-          <div class="art-card">
-            <img src="https://i.postimg.cc/G2vWPVkT/image-2026-03-03-030725032.png" alt="Fan Art">
-          </div>
-          <div class="art-card">
-            <img src="https://i.postimg.cc/WznxCZWW/image-2026-03-03-030739293.png" alt="Fan Art">
-          </div>
-          <div class="art-card">
-            <img src="https://i.postimg.cc/CxdVtRth/image-2026-03-06-233005494.png" alt="Fan Art by kaliopus ( Dinis )">
-            <div class="art-overlay">
-              <div class="art-author-info">
-                <img
-                  src="https://cdn.discordapp.com/avatars/220765417742925824/b6fc42ef4b0aef9183a1168511ba3b85.webp?size=1024"
-                  alt="kaliopus ( Dinis )" class="art-author-avatar">
-                <span>By kaliopus ( Dinis )</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="fan-art-footer">
-          <a href="#" class="view-all-arts-btn">
-            <span data-i18n="section_view_all">View all</span>
-          </a>
-        </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Credits Section -->
-      <section id="credits">
-        <div class="credits-header">
-          <h2 class="section-title-big" data-i18n="credits_section_title">Contributors</h2>
+    <!-- Clips Section -->
+    <section id="clips">
+      <h2 class="section-title-big" data-i18n="clips_title">Latest Clips</h2>
+      <div class="clips-grid">
+        <div class="clip-card">
+          <iframe
+            src="https://clips.twitch.tv/embed?clip=SavorySmilingBaconANELE-7SZ3rk0npiOkudrs&parent=ash5d.netlify.app"
+            frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
+        </div>
+        <div class="clip-card">
+          <iframe
+            src="https://clips.twitch.tv/embed?clip=BumblingArtisticWheelKappa-r_j66VQHYj_lgvwT&parent=ash5d.netlify.app"
+            frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
+        </div>
+        <div class="clip-label"><span data-i18n="clip_label_racist">Racist Clip</span></div>
+        <div class="clip-card" id="latest-clip-card">
+          <iframe id="latest-clip-iframe"
+            src="https://clips.twitch.tv/embed?clip=SquareBenevolentReindeerSoBayed-iMQR4wpuwWL6wq5o&parent=ash5d.netlify.app"
+            frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section id="schedule">
+
+      <h2 class="section-title-big" data-i18n="schedule_title">ASH Stream Schedule</h2>
+      <div class="schedule-grid">
+        <div class="schedule-card">
+          <div class="card-emoji">
+            <img src="ezgif.com-optiwebp.webp" alt="Cute Spark">
+          </div>
+          <div class="day-info">
+            <span>Twitch</span>
+          </div>
+          <h3 class="stream-title" data-i18n="stream_title_drawing">Drawing with friends</h3>
         </div>
 
-        <div class="credits-grid">
-
-
-          <!-- M7_killer -->
-          <div class="credit-card color-cyan">
-            <div class="card-icon"><i data-lucide="code"></i></div>
-            <div class="avatar-ring">
-              <div class="galaxy-container">
-                <div class="nebula"></div>
-                <div class="holographic-ring"></div>
-                <div class="shooting-star ss1"></div>
-                <div class="shooting-star ss2"></div>
-                <!-- Static Tiny Stars -->
-                <div class="tiny-star" style="top: 10%; left: 20%; animation-delay: 0.5s;"></div>
-                <div class="tiny-star" style="top: 80%; left: 15%; animation-delay: 1.2s;"></div>
-                <div class="tiny-star" style="top: 30%; left: 85%; animation-delay: 0.8s;"></div>
-                <div class="tiny-star" style="top: 70%; left: 75%; animation-delay: 2s;"></div>
-
-                <!-- Orbiting Stars -->
-                <div class="star s1"></div>
-                <div class="star s2"></div>
-
-                <!-- Planets -->
-                <div class="planet p1"></div>
-                <div class="planet p2"></div>
-
-                <!-- Sparkles -->
-                <div class="sparkle sp1" style="top: 20%; left: 30%;"></div>
-                <div class="sparkle sp2" style="top: 70%; left: 80%;"></div>
-                <div class="sparkle sp3" style="top: 40%; left: 10%;"></div>
-                <div class="sparkle sp4" style="top: 10%; left: 70%;"></div>
-                <div class="sparkle sp5" style="top: 85%; left: 40%;"></div>
-              </div>
-              <img src="public/m7-avatar.png" alt="M7_killer" class="creator-avatar">
-            </div>
-            <h3 class="creator-name">M7_killer</h3>
-            <p class="creator-role" data-i18n="credits_alznoy_role">Programmer</p>
-            <p class="creator-desc" data-i18n="credits_alznoy_desc">Discord bot & website</p>
-            <a href="https://guns.lol/m7_killer" target="_blank" rel="noopener noreferrer" class="visit-btn"><span
-                data-i18n="credits_visit">Visit Profile</span> <i data-lucide="external-link"></i></a>
+        <div class="schedule-card">
+          <div class="card-emoji">
+            <img src="ezgif.com-optiwebp (1).webp" alt="Gaming Spark">
           </div>
+          <div class="day-info">
+            <span>Twitch</span>
+          </div>
+          <h3 class="stream-title" data-i18n="stream_title_random">Playing random games</h3>
+        </div>
 
-          <!-- 1redzo -->
-          <div class="credit-card color-yellow">
-            <div class="card-icon"><i data-lucide="eye"></i></div>
-            <div class="avatar-ring">
-              <div class="galaxy-container">
-                <!-- Racing Elements Only -->
-                <div class="porsche-car c1">🏎️</div>
-                <div class="porsche-car c2">🏎️</div>
+        <div class="schedule-card">
+          <div class="card-emoji">
+            <img src="https://i.postimg.cc/0NRvCLcV/flora.png" alt="Flora">
+          </div>
+          <div class="day-info">
+            <span>Discord</span>
+          </div>
+          <h3 class="stream-title" data-i18n="stream_title_flora">Stream according to flora's mood</h3>
+        </div>
+      </div>
+    </section>
 
-                <!-- Speed Streaks -->
-                <div class="speed-streak line1"></div>
-                <div class="speed-streak line2"></div>
-                <div class="speed-streak line3"></div>
-              </div>
+    <!-- Commissions Section -->
+    <section id="commissions">
+      <h2 class="section-title-big" data-i18n="commissions_title">Art Commissions</h2>
+      <div class="commissions-container">
+        <div class="commission-art-card" style="position: relative;">
+          <!-- Commission Status Badge (Inside the Box) -->
+          <div id="global-commission-badge" class="commission-badge open">
+              <div class="badge-dot"></div>
+              <span class="badge-text" data-i18n="commission_badge_open">OPEN COMMISSIONS</span>
+          </div>
+          <img src="https://i.postimg.cc/hg1vHDjC/image-2026-04-26-120653466.png" alt="Commission Art">
+          <div class="commission-overlay">
+            <a href="commissions.html" target="_blank" id="open-commissions-btn" class="btn-skew btn-primary" style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none;">
+              <span data-i18n="commissions_btn">Open Commissions</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fan Art Section -->
+    <section id="fan-art">
+      <h2 class="section-title-big" data-i18n="fan_art_title">Fan Art</h2>
+      <div class="fan-art-grid">
+        <div class="art-card">
+          <img src="public/fan-art-saz.png" alt="Fan Art by @sazartist">
+          <div class="art-overlay">
+            <div class="art-author-info">
               <img
-                src="ezgif.com-optimize.gif"
-                alt="1redzo" class="creator-avatar">
+                src="https://cdn.discordapp.com/avatars/431569701529714698/71a8aeb4a99048ac674e9b89d48bc8be.webp?size=1024"
+                alt="@sazartist" class="art-author-avatar">
+              <span>By @sazartist</span>
             </div>
-            <h3 class="creator-name">1redzo</h3>
-            <p class="creator-role" data-i18n="credits_linkpea_role">VIEWER</p>
-            <p class="creator-desc" data-i18n="credits_linkpea_desc">Killer Lover</p>
-            <a href="https://www.twitch.tv/1redzo" target="_blank" rel="noopener noreferrer" class="visit-btn"><span
-                data-i18n="credits_visit">Visit Profile</span> <i data-lucide="external-link"></i></a>
           </div>
         </div>
-      </section>
+        <div class="art-card">
+          <img src="public/fan-art-saz-2.jpg" alt="Fan Art by @sazartist">
+          <div class="art-overlay">
+            <div class="art-author-info">
+              <img
+                src="https://cdn.discordapp.com/avatars/431569701529714698/71a8aeb4a99048ac674e9b89d48bc8be.webp?size=1024"
+                alt="@sazartist" class="art-author-avatar">
+              <span>By @sazartist</span>
+            </div>
+          </div>
+        </div>
+        <div class="art-card">
+          <img src="public/fan-art-saz-3.png" alt="Fan Art by @sazartist">
+          <div class="art-overlay">
+            <div class="art-author-info">
+              <img
+                src="https://cdn.discordapp.com/avatars/431569701529714698/71a8aeb4a99048ac674e9b89d48bc8be.webp?size=1024"
+                alt="@sazartist" class="art-author-avatar">
+              <span>By @sazartist</span>
+            </div>
+          </div>
+        </div>
+        <div class="art-card">
+          <img src="public/fan-art-redzo.png" alt="Fan Art by @1redzo">
+          <div class="art-overlay">
+            <div class="art-author-info">
+              <img src="ezgif.com-optimize.gif" alt="@1redzo" class="art-author-avatar">
+              <span>By @1redzo</span>
+            </div>
+          </div>
+        </div>
+        <div class="art-card">
+          <img src="public/fan-art-wyxp.png" alt="Fan Art by @wyxp">
+          <div class="art-overlay">
+            <div class="art-author-info">
+              <img src="ezgif.com-optimize (1).gif" alt="@wyxp" class="art-author-avatar">
+              <span>By @wyxp</span>
+            </div>
+          </div>
+        </div>
+        <div class="art-card">
+          <img src="public/fan-art-mkoko.jpg" alt="Fan Art by mko.ko ( Malak )">
+          <div class="art-overlay">
+            <div class="art-author-info">
+              <img
+                src="https://cdn.discordapp.com/avatars/810388695311056896/70de45f00ed87ee24674b53d57605bb6.webp?size=1024"
+                alt="mko.ko ( Malak )" class="art-author-avatar">
+              <span>By mko.ko ( Malak )</span>
+            </div>
+          </div>
+        </div>
+        <div class="art-card">
+          <img src="public/fan-art-llzn.png" alt="Fan Art by .llzn9 ( MAR )">
+          <div class="art-overlay">
+            <div class="art-author-info">
+              <img
+                src="https://cdn.discordapp.com/avatars/928168815659999263/dc6b19a94f5f36477443fb072425a116.webp?size=1024"
+                alt=".llzn9 ( MAR )" class="art-author-avatar">
+              <span>By .llzn9 ( MAR )</span>
+            </div>
+          </div>
+        </div>
+        <div class="art-card">
+          <img src="public/fan-art-rtx-pizza.png" alt="Fan Art by rtx_pizza">
+          <div class="art-overlay">
+            <div class="art-author-info">
+              <img
+                src="https://cdn.discordapp.com/avatars/839635094394110003/e512ccfd67a221f2fab817f4e84c6998.webp?size=1024"
+                alt="rtx_pizza" class="art-author-avatar">
+              <span>By rtx_pizza</span>
+            </div>
+          </div>
+        </div>
+        <div class="art-card">
+          <img src="public/fan-art-yukisilar.png" alt="Fan Art by yukisilar">
+          <div class="art-overlay">
+            <div class="art-author-info">
+              <img src="https://i.postimg.cc/r8thDyfj/image-2026-04-24-142753450.png" alt="yukisilar"
+                class="art-author-avatar">
+              <span>By yukisilar</span>
+            </div>
+          </div>
+        </div>
+        <div class="art-card">
+          <img src="public/fan-art-city-sunset.png" alt="Fan Art by sazartist & ii.sun ( SUN )">
+          <div class="art-overlay">
+            <div class="art-author-info">
+              <div class="author-avatars" style="display: flex; align-items: center;">
+                <img
+                  src="https://cdn.discordapp.com/avatars/431569701529714698/71a8aeb4a99048ac674e9b89d48bc8be.webp?size=1024"
+                  alt="sazartist" class="art-author-avatar">
+                <img src="https://i.postimg.cc/3KnrCq0c/image-2026-04-25-024454446.png" alt="ii.sun ( SUN )"
+                  class="art-author-avatar" style="margin-left: -15px; border-color: var(--secondary);">
+              </div>
+              <span>By sazartist & ii.sun ( SUN )</span>
+            </div>
+          </div>
+        </div>
+        <div class="art-card">
+          <img src="https://i.postimg.cc/5t7brZGf/image-2026-03-03-021608111.png" alt="Fan Art by @sazartist">
+          <div class="art-overlay">
+            <div class="art-author-info">
+              <img
+                src="https://cdn.discordapp.com/avatars/431569701529714698/71a8aeb4a99048ac674e9b89d48bc8be.webp?size=1024"
+                alt="@sazartist" class="art-author-avatar">
+              <span>By @sazartist</span>
+            </div>
+          </div>
+        </div>
+        <div class="art-card">
+          <img src="https://i.postimg.cc/qMSKPFfV/image-2026-03-03-022158113.png" alt="Fan Art by @suppakaizou">
+          <div class="art-overlay">
+            <div class="art-author-info">
+              <img src="https://i.postimg.cc/9XrMPks2/image-2026-04-24-145920951.png" alt="@suppakaizou"
+                class="art-author-avatar">
+              <span>By @suppakaizou</span>
+            </div>
+          </div>
+        </div>
+        <div class="art-card">
+          <img src="https://i.postimg.cc/Gp7Tjgxg/image-2026-03-03-022624987.png" alt="Fan Art by .fo ( Fno )">
+          <div class="art-overlay">
+            <div class="art-author-info">
+              <img src="https://i.postimg.cc/ZqC5Jb6F/image-2026-03-03-022745387.png" alt=".fo ( Fno )"
+                class="art-author-avatar">
+              <span>By .fo ( Fno )</span>
+            </div>
+          </div>
+        </div>
+        <div class="art-card">
+          <img src="https://i.postimg.cc/1RM2rpkf/image-2026-03-03-023115405.png" alt="Fan Art by @soilichi (otto)">
+          <div class="art-overlay">
+            <div class="art-author-info">
+              <img
+                src="https://cdn.discordapp.com/guilds/1204715152851869706/users/576216674207006721/avatars/a_3d7ccc28212c9f4598940123b206678d.gif?size=1024&animated=true"
+                alt="@soilichi (otto)" class="art-author-avatar">
+              <span>By @soilichi (otto)</span>
+            </div>
+          </div>
+        </div>
+        <div class="art-card">
+          <img src="https://i.postimg.cc/3xwvDHgr/image-2026-03-03-023922044.png" alt="Fan Art by @soilichi (otto)">
+          <div class="art-overlay">
+            <div class="art-author-info">
+              <img
+                src="https://cdn.discordapp.com/guilds/1204715152851869706/users/576216674207006721/avatars/a_3d7ccc28212c9f4598940123b206678d.gif?size=1024&animated=true"
+                alt="@soilichi (otto)" class="art-author-avatar">
+              <span>By @soilichi (otto)</span>
+            </div>
+          </div>
+        </div>
+        <div class="art-card">
+          <img src="https://i.postimg.cc/1XH8fWX9/image-2026-03-03-024022178.png" alt="Fan Art by aoki_chan. ( Rem )">
+          <div class="art-overlay">
+            <div class="art-author-info">
+              <img
+                src="https://cdn.discordapp.com/avatars/454288320302678016/d6c5a1a2b3158c420e66a855bd17a602.webp?size=1024"
+                alt="aoki_chan. ( Rem )" class="art-author-avatar">
+              <span>By aoki_chan. ( Rem )</span>
+            </div>
+          </div>
+        </div>
+        <div class="art-card">
+          <img src="https://i.postimg.cc/0QGQBtpG/image-2026-03-03-024136406.png" alt="Fan Art by ii.sun ( SUN )">
+          <div class="art-overlay">
+            <div class="art-author-info">
+              <img src="https://i.postimg.cc/3KnrCq0c/image-2026-04-25-024454446.png" alt="ii.sun ( SUN )"
+                class="art-author-avatar">
+              <span>By ii.sun ( SUN )</span>
+            </div>
+          </div>
+        </div>
+        <div class="art-card">
+          <img src="https://i.postimg.cc/xd1V26V2/image-2026-03-03-024945192.png" alt="Fan Art by kaliopus ( Dinis )">
+          <div class="art-overlay">
+            <div class="art-author-info">
+              <img
+                src="https://cdn.discordapp.com/avatars/220765417742925824/b6fc42ef4b0aef9183a1168511ba3b85.webp?size=1024"
+                alt="kaliopus ( Dinis )" class="art-author-avatar">
+              <span>By kaliopus ( Dinis )</span>
+            </div>
+          </div>
+        </div>
+        <div class="art-card">
+          <img src="https://i.postimg.cc/Y05t2YfQ/image-2026-03-03-030002375.png" alt="Fan Art">
+        </div>
+        <div class="art-card">
+          <img src="https://i.postimg.cc/1R2mK1hD/image-2026-03-03-030011587.png" alt="Fan Art">
+        </div>
+        <div class="art-card">
+          <img src="https://i.postimg.cc/HsMpZvd3/image-2026-03-03-030019190.png" alt="Fan Art">
+        </div>
+        <div class="art-card">
+          <img src="https://i.postimg.cc/wjd9S5Bz/image-2026-03-03-030030487.png" alt="Fan Art">
+        </div>
+        <div class="art-card">
+          <img src="https://i.postimg.cc/tgqpgXP3/image-2026-03-03-030046493.png" alt="Fan Art">
+        </div>
+        <div class="art-card">
+          <img src="https://i.postimg.cc/G2vWPVkT/image-2026-03-03-030725032.png" alt="Fan Art">
+        </div>
+        <div class="art-card">
+          <img src="https://i.postimg.cc/WznxCZWW/image-2026-03-03-030739293.png" alt="Fan Art">
+        </div>
+        <div class="art-card">
+          <img src="https://i.postimg.cc/CxdVtRth/image-2026-03-06-233005494.png" alt="Fan Art by kaliopus ( Dinis )">
+          <div class="art-overlay">
+            <div class="art-author-info">
+              <img
+                src="https://cdn.discordapp.com/avatars/220765417742925824/b6fc42ef4b0aef9183a1168511ba3b85.webp?size=1024"
+                alt="kaliopus ( Dinis )" class="art-author-avatar">
+              <span>By kaliopus ( Dinis )</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fan-art-footer">
+        <a href="#" class="view-all-arts-btn">
+          <span data-i18n="section_view_all">View all</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Credits Section -->
+    <section id="credits">
+      <div class="credits-header">
+        <h2 class="section-title-big" data-i18n="credits_section_title">Contributors</h2>
+      </div>
+
+      <div class="credits-grid">
+
+
+        <!-- M7_killer -->
+        <div class="credit-card color-cyan">
+          <div class="card-icon"><i data-lucide="code"></i></div>
+          <div class="avatar-ring">
+            <div class="galaxy-container">
+              <div class="nebula"></div>
+              <div class="holographic-ring"></div>
+              <div class="shooting-star ss1"></div>
+              <div class="shooting-star ss2"></div>
+              <!-- Static Tiny Stars -->
+              <div class="tiny-star" style="top: 10%; left: 20%; animation-delay: 0.5s;"></div>
+              <div class="tiny-star" style="top: 80%; left: 15%; animation-delay: 1.2s;"></div>
+              <div class="tiny-star" style="top: 30%; left: 85%; animation-delay: 0.8s;"></div>
+              <div class="tiny-star" style="top: 70%; left: 75%; animation-delay: 2s;"></div>
+
+              <!-- Orbiting Stars -->
+              <div class="star s1"></div>
+              <div class="star s2"></div>
+
+              <!-- Planets -->
+              <div class="planet p1"></div>
+              <div class="planet p2"></div>
+
+              <!-- Sparkles -->
+              <div class="sparkle sp1" style="top: 20%; left: 30%;"></div>
+              <div class="sparkle sp2" style="top: 70%; left: 80%;"></div>
+              <div class="sparkle sp3" style="top: 40%; left: 10%;"></div>
+              <div class="sparkle sp4" style="top: 10%; left: 70%;"></div>
+              <div class="sparkle sp5" style="top: 85%; left: 40%;"></div>
+            </div>
+            <img src="public/m7-avatar.png" alt="M7_killer" class="creator-avatar">
+          </div>
+          <h3 class="creator-name">M7_killer</h3>
+          <p class="creator-role" data-i18n="credits_alznoy_role">Programmer</p>
+          <p class="creator-desc" data-i18n="credits_alznoy_desc">Discord bot & website</p>
+          <a href="https://guns.lol/m7_killer" target="_blank" rel="noopener noreferrer" class="visit-btn"><span
+              data-i18n="credits_visit">Visit Profile</span> <i data-lucide="external-link"></i></a>
+        </div>
+
+        <!-- 1redzo -->
+        <div class="credit-card color-yellow">
+          <div class="card-icon"><i data-lucide="eye"></i></div>
+          <div class="avatar-ring">
+            <div class="galaxy-container">
+              <!-- Racing Elements Only -->
+              <div class="porsche-car c1">🏎️</div>
+              <div class="porsche-car c2">🏎️</div>
+
+              <!-- Speed Streaks -->
+              <div class="speed-streak line1"></div>
+              <div class="speed-streak line2"></div>
+              <div class="speed-streak line3"></div>
+            </div>
+            <img src="ezgif.com-optimize.gif" alt="1redzo" class="creator-avatar">
+          </div>
+          <h3 class="creator-name">1redzo</h3>
+          <p class="creator-role" data-i18n="credits_linkpea_role">VIEWER</p>
+          <p class="creator-desc" data-i18n="credits_linkpea_desc">Killer Lover</p>
+          <a href="https://www.twitch.tv/1redzo" target="_blank" rel="noopener noreferrer" class="visit-btn"><span
+              data-i18n="credits_visit">Visit Profile</span> <i data-lucide="external-link"></i></a>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
@@ -545,15 +633,37 @@
             <span data-i18n="footer_discord_btn">Join Discord</span>
           </a>
           <div class="footer-social-mini">
-            <a href="https://x.com/ash5D" target="_blank" class="social-item twitter"><i data-lucide="twitter"></i><span
-                data-i18n="social_twitter">Twitter</span></a>
+            <a href="https://x.com/ash5D" target="_blank" class="social-item twitter"><svg role="img"
+                viewBox="-2 -2 28 28" fill="currentColor" style="width: 1.1rem; height: 1.1rem;">
+                <path
+                  d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+              </svg><span data-i18n="social_twitter">Twitter</span></a>
             <a href="https://www.instagram.com/ash50s?igsh=MWNxdzE1am9jYzczZg==" target="_blank"
-              class="social-item instagram"><i data-lucide="instagram"></i><span
-                data-i18n="social_instagram">Instagram</span></a>
-            <a href="https://discord.gg/HRFZ7SuSFd" target="_blank" class="social-item discord"><i
-                data-lucide="message-square"></i><span data-i18n="social_discord">Discord</span></a>
-            <a href="https://www.twitch.tv/ash5d" target="_blank" class="social-item twitch"><i
-                data-lucide="twitch"></i><span data-i18n="social_twitch">Twitch</span></a>
+              class="social-item instagram"><svg role="img" viewBox="-2 -2 28 28" fill="currentColor"
+                style="width: 1.1rem; height: 1.1rem;">
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+              </svg><span data-i18n="social_instagram">Instagram</span></a>
+            <a href="https://discord.gg/HRFZ7SuSFd" target="_blank" class="social-item discord"><svg role="img"
+                viewBox="-2 -2 28 28" fill="currentColor" style="width: 1.1rem; height: 1.1rem;">
+                <path
+                  d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z" />
+              </svg><span data-i18n="social_discord">Discord</span></a>
+            <a href="https://www.twitch.tv/ash5d" target="_blank" class="social-item twitch"><svg role="img"
+                viewBox="-2 -2 28 28" fill="currentColor" style="width: 1.1rem; height: 1.1rem;">
+                <path
+                  d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z" />
+              </svg><span data-i18n="social_twitch">Twitch</span></a>
+            <a href="https://kick.com/ash5d" target="_blank" class="social-item kick"><svg role="img"
+                viewBox="-3 -3 30 30" fill="currentColor" style="width: 1.1rem; height: 1.1rem;">
+                <path
+                  d="M1.333 0h8v5.333H12V2.667h2.667V0h8v8H20v2.667h-2.667v2.666H20V16h2.667v8h-8v-2.667H12v-2.666H9.333V24h-8Z" />
+              </svg><span data-i18n="social_kick">Kick</span></a>
+            <a href="https://www.tiktok.com/@ash50s" target="_blank" class="social-item tiktok"><svg role="img"
+                viewBox="-2 -2 28 28" fill="currentColor" style="width: 1.1rem; height: 1.1rem;">
+                <path
+                  d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 2.23-1.13 4.39-2.92 5.72-1.78 1.33-4.09 1.83-6.26 1.41-2.18-.42-4.13-1.68-5.33-3.46-1.2-1.79-1.57-4.11-1.02-6.2.55-2.09 1.94-3.88 3.8-4.88 1.85-.99 4.09-1.16 6.07-.48V13.4c-1.29-.44-2.73-.24-3.86.51-1.13.76-1.87 2.06-2.05 3.4-.18 1.34.2 2.72 1.05 3.75.84 1.03 2.14 1.63 3.5 1.63 1.36 0 2.66-.6 3.5-1.63.85-1.03 1.23-2.41 1.05-3.75-.02-3.86-.01-7.72-.01-11.58.01-1.89.01-3.78.02-5.67z" />
+              </svg><span data-i18n="social_tiktok">TikTok</span></a>
           </div>
         </div>
       </div>
@@ -563,6 +673,11 @@
           <span data-i18n="footer_copyright">© 2026 ASH5D . All Rights Reserved</span>
           <span class="footer-separator">•</span>
           <span data-i18n="footer_made_with">Made with love ❤️ Vault</span>
+          <span class="footer-separator">•</span>
+          <a href="admin.html" style="color: rgba(255,255,255,0.3); text-decoration: none; font-size: 0.8rem; display: flex; align-items: center; gap: 4px; transition: color 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 12px; height: 12px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            Login
+          </a>
         </div>
         <p class="footer-quote" data-i18n="footer_quote">"Way To Go Superstar✨"</p>
       </div>
@@ -570,7 +685,8 @@
   </footer>
 
   <!-- Vite requires a module script entry so it can bundle the file during build -->
-  <script type="module" src="/main.js"></script>
+
+  <script type="module" src="./main.js"></script>
   <script>
     lucide.createIcons();
   </script>
