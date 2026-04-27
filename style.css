@@ -472,41 +472,58 @@ header {
     border-color: rgba(255, 255, 255, 0.3);
 }
 
+.social-item:hover svg {
+    filter: drop-shadow(0 0 8px currentColor);
+}
+
 .tiktok:hover {
-    background: #EE1D52;
+    color: #EE1D52;
     border-color: #EE1D52;
-    box-shadow: 0 0 15px #EE1D52;
+    box-shadow: 0 0 20px #EE1D52, inset 0 0 15px rgba(238, 29, 82, 0.3);
+    text-shadow: 0 0 8px #EE1D52;
 }
 
 .discord:hover {
-    background: #5865F2;
+    color: #5865F2;
     border-color: #5865F2;
-    box-shadow: 0 0 15px #5865F2;
+    box-shadow: 0 0 20px #5865F2, inset 0 0 15px rgba(88, 101, 242, 0.3);
+    text-shadow: 0 0 8px #5865F2;
 }
 
 .instagram:hover {
-    background: #E1306C;
+    color: #E1306C;
     border-color: #E1306C;
-    box-shadow: 0 0 15px #E1306C;
+    box-shadow: 0 0 20px #E1306C, inset 0 0 15px rgba(225, 48, 108, 0.3);
+    text-shadow: 0 0 8px #E1306C;
 }
 
 .twitter:hover {
-    background: #1DA1F2;
+    color: #1DA1F2;
     border-color: #1DA1F2;
-    box-shadow: 0 0 15px #1DA1F2;
+    box-shadow: 0 0 20px #1DA1F2, inset 0 0 15px rgba(29, 161, 242, 0.3);
+    text-shadow: 0 0 8px #1DA1F2;
 }
 
 .youtube:hover,
 .dont-click:hover {
-    background: #FF0000;
+    color: #FF0000;
     border-color: #FF0000;
-    box-shadow: 0 0 25px #FF0000;
+    box-shadow: 0 0 20px #FF0000, inset 0 0 15px rgba(255, 0, 0, 0.3);
+    text-shadow: 0 0 8px #FF0000;
 }
 
 .twitch:hover {
-    background: #9146FF;
+    color: #9146FF;
     border-color: #9146FF;
-    box-shadow: 0 0 15px #9146FF;
+    box-shadow: 0 0 20px #9146FF, inset 0 0 15px rgba(145, 70, 255, 0.3);
+    text-shadow: 0 0 8px #9146FF;
+}
+
+.kick:hover {
+    color: #53FC18;
+    border-color: #53FC18;
+    box-shadow: 0 0 20px #53FC18, inset 0 0 15px rgba(83, 252, 24, 0.3);
+    text-shadow: 0 0 8px #53FC18;
 }
 
 /* Sections */
@@ -538,6 +555,478 @@ section {
     text-align: center;
     color: #fff;
     text-shadow: 0 0 15px var(--secondary);
+}
+
+/* News Section */
+#news {
+    padding: 60px 5%;
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.news-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.news-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+.news-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.news-icon {
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 1.5rem;
+    transition: 0.3s ease;
+}
+
+.news-card:hover .instagram-icon {
+    color: #E1306C;
+    filter: drop-shadow(0 0 10px rgba(225, 48, 108, 0.5));
+}
+
+.news-card:hover .tiktok-icon {
+    color: #EE1D52;
+    filter: drop-shadow(0 0 10px rgba(238, 29, 82, 0.5));
+}
+
+.news-content h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.news-content p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+}
+
+.news-btn {
+    margin-top: auto;
+    font-size: 0.9rem;
+    padding: 0.8rem 1.5rem;
+}
+
+/* Commissions Section */
+#commissions {
+    padding: 80px 5%;
+}
+
+.commissions-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.commission-art-card {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    aspect-ratio: 16 / 9;
+}
+
+.commission-art-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.commission-art-card:hover img {
+    transform: scale(1.05);
+}
+
+.commission-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.commission-art-card:hover .commission-overlay {
+    opacity: 1;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+/* VGen Style Modal */
+.vgen-modal {
+    background: #0f0f12;
+    width: 100%;
+    max-width: 1100px;
+    max-height: 90vh;
+    border-radius: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 100px rgba(225, 48, 108, 0.1);
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.3s;
+}
+
+.modal-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.vgen-header {
+    padding: 30px 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.vgen-header h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.vgen-body {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.vgen-gallery {
+    padding: 40px;
+    background: #09090b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.vgen-gallery img {
+    max-width: 100%;
+    max-height: 500px;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+.vgen-gallery-dots {
+    display: flex;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.vgen-gallery-dots .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.vgen-gallery-dots .dot.active {
+    background: var(--primary);
+    box-shadow: 0 0 10px var(--primary);
+}
+
+.vgen-sidebar {
+    padding: 40px;
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.price-starting {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.price-starting span:last-child {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-left: 5px;
+}
+
+.vgen-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.vgen-option {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.vgen-option:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.vgen-option input {
+    margin-right: 15px;
+    accent-color: var(--primary);
+}
+
+.option-label {
+    flex: 1;
+    font-weight: 500;
+}
+
+.option-price {
+    font-weight: 700;
+    color: #fff;
+}
+
+.vgen-terms {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.vgen-terms label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+/* Commission Status Badge */
+.commission-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: default;
+}
+
+.commission-badge.open {
+    background: rgba(34, 197, 94, 0.15);
+    color: #4ade80;
+    border-color: rgba(74, 222, 128, 0.3);
+}
+.commission-badge.open .badge-dot {
+    background: #4ade80;
+    box-shadow: 0 0 12px #4ade80;
+}
+
+.commission-badge.closed {
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+    border-color: rgba(248, 113, 113, 0.3);
+}
+.commission-badge.closed .badge-dot {
+    background: #f87171;
+    box-shadow: 0 0 12px #f87171;
+}
+
+.badge-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.6; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.btn-discord {
+    background: #5865F2;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    transition: background 0.3s;
+}
+
+.btn-discord:hover {
+    background: #4752C4;
+}
+
+.vgen-btn-primary {
+    background: #fff;
+    color: #000;
+    border: none;
+    padding: 18px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.vgen-btn-primary:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.vgen-btn-primary:not(:disabled):hover {
+    transform: scale(1.02);
+    background: #f0f0f0;
+}
+
+/* Chat Section */
+.vgen-chat-section {
+    margin-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.vgen-chat-section h3 {
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+.chat-messages {
+    height: 150px;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.chat-msg {
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    max-width: 85%;
+}
+
+.chat-msg.user {
+    background: var(--primary);
+    color: white;
+    align-self: flex-end;
+}
+
+.chat-msg.artist {
+    background: rgba(255, 255, 255, 0.1);
+    align-self: flex-start;
+}
+
+.chat-input-container {
+    display: flex;
+    gap: 10px;
+}
+
+#chat-input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+    color: #fff;
+}
+
+.chat-send-btn {
+    background: var(--primary);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 900px) {
+    .vgen-body {
+        grid-template-columns: 1fr;
+    }
+    .vgen-sidebar {
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
 }
 
 /* Clips Section */
@@ -575,8 +1064,15 @@ section {
     font-weight: 900;
     color: #fff;
     text-shadow: 0 0 15px var(--secondary);
-    display: inline-block;
-    align-self: center;
+    text-align: center;
+    justify-self: center;
+}
+
+#latest-clip-card {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: 100%;
+    max-width: 620px;
 }
 
 .clip-card iframe {
@@ -1273,27 +1769,6 @@ section {
 
 .footer-social-mini .social-item:hover {
     transform: translateY(-5px) scale(1.1);
-    border-color: transparent;
-}
-
-.footer-social-mini .twitter:hover {
-    background: #1da1f2;
-    box-shadow: 0 5px 15px rgba(29, 161, 242, 0.4);
-}
-
-.footer-social-mini .instagram:hover {
-    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-    box-shadow: 0 5px 15px rgba(225, 48, 108, 0.4);
-}
-
-.footer-social-mini .discord:hover {
-    background: #5865f2;
-    box-shadow: 0 5px 15px rgba(88, 101, 242, 0.4);
-}
-
-.footer-social-mini .twitch:hover {
-    background: #9146ff;
-    box-shadow: 0 5px 15px rgba(145, 70, 255, 0.4);
 }
 
 .footer-bottom {
