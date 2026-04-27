@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASH Commissions</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      background-color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      margin: 0;
+      color: #fff;
+    }
+    .vgen-modal {
+      position: relative;
+      max-height: none;
+      height: 90vh;
+      width: 100%;
+      max-width: 1250px;
+      background: #000;
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .vgen-header {
+      padding: 20px 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .vgen-body {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      flex: 1;
+      overflow: hidden;
+    }
+    .vgen-gallery {
+      position: relative;
+      background: #050505;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      overflow: hidden;
+    }
+    .vgen-gallery img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    }
+    .vgen-sidebar {
+      padding: 40px;
+      border-left: 1px solid rgba(255,255,255,0.05);
+      background: #09090b;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+    .vgen-gallery-dots {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .dot.active {
+      background: var(--primary);
+      box-shadow: 0 0 10px var(--primary);
+    }
+    .price-starting {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+    .vgen-options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .vgen-option {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .vgen-option:hover {
+      background: rgba(255,255,255,0.05);
+    }
+    .vgen-option input {
+      accent-color: var(--primary);
+      width: 20px;
+      height: 20px;
+    }
+    .option-label {
+      flex: 1;
+      font-weight: 600;
+    }
+    .option-price {
+      font-weight: 800;
+      color: var(--primary);
+    }
+    .custom-counter {
+      display: flex;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+    .counter-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: none;
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+      font-weight: 800;
+      transition: 0.3s;
+    }
+    .counter-btn:hover {
+      background: var(--primary);
+      color: #000;
+    }
+    .counter-btn:active {
+      transform: scale(0.95);
+    }
+    .counter-val {
+      font-weight: 800;
+      min-width: 40px;
+      text-align: center;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+    .btn-discord {
+      width: 100%;
+      padding: 15px;
+      background: #5865F2;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+    .vgen-btn-primary {
+      width: 100%;
+      padding: 20px;
+      background: var(--primary);
+      color: #000;
+      border: none;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .vgen-btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .modal-close {
+      display: none; 
+    }
+    @media (max-width: 900px) {
+      .vgen-body {
+        grid-template-columns: 1fr;
+      }
+      .vgen-sidebar {
+        border-left: none;
+        border-top: 1px solid rgba(255,255,255,0.05);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  
+  <div class="vgen-modal" id="commissions-modal">
+    <!-- Commission Status Badge (Inside the Box) -->
+    <div id="global-commission-badge" class="commission-badge open">
+        <div class="badge-dot"></div>
+        <span class="badge-text" data-i18n="commission_badge_open">OPEN COMMISSIONS</span>
+    </div>
+    <div class="vgen-header">
+      <h2 data-i18n="commissions_modal_title">Emote Commissions</h2>
+    </div>
+    
+    <div class="vgen-body">
+      <div class="vgen-gallery" id="vgen-gallery-images">
+        <img src="https://i.postimg.cc/hg1vHDjC/image-2026-04-26-120653466.png" alt="Emote Preview">
+        <div class="vgen-gallery-dots">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+      
+      <div class="vgen-sidebar">
+        <div class="price-starting">
+          <span data-i18n="commissions_price_starting">Starting at $</span><span>20</span>
+        </div>
+        
+        <div class="vgen-options" id="vgen-options-list">
+          <label class="vgen-option">
+            <input type="radio" name="emote-option" value="1" checked>
+            <span class="option-label" data-i18n="commissions_option_1">1 Emote</span>
+            <span class="option-price">$20</span>
+          </label>
+          <label class="vgen-option">
+            <input type="radio" name="emote-option" value="3">
+            <span class="option-label" data-i18n="commissions_option_3">3 Emotes</span>
+            <span class="option-price">$60</span>
+          </label>
+          <label class="vgen-option">
+            <input type="radio" name="emote-option" value="5">
+            <span class="option-label" data-i18n="commissions_option_5">5 Emotes</span>
+            <span class="option-price">$100</span>
+          </label>
+          <label class="vgen-option custom-option-row">
+            <input type="radio" name="emote-option" value="custom" style="display:none;" id="custom-radio">
+            <div class="custom-counter">
+              <button type="button" class="counter-btn minus">-</button>
+              <span class="counter-val">1</span>
+              <button type="button" class="counter-btn plus">+</button>
+            </div>
+            <span class="option-label" data-i18n="commissions_option_custom">Custom Number Emote</span>
+            <span class="option-price custom-price-display">$20</span>
+          </label>
+        </div>
+        
+        <div class="vgen-discord-login">
+          <button id="discord-login-btn" class="btn-discord">
+            <svg width="24" height="24" viewBox="0 0 127.14 96.36" fill="currentColor">
+              <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.31,60,73.31,53s5-12.74,11.43-12.74S96.2,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
+            </svg>
+            <span data-i18n="discord_signin">Sign in with Discord</span>
+          </button>
+          <div id="discord-user-info" style="display: none; align-items: center; gap: 10px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px;">
+             <img id="discord-avatar" src="" alt="Avatar" style="width: 32px; height: 32px; border-radius: 50%;">
+             <span id="discord-username-display" style="font-weight: bold;"></span>
+          </div>
+        </div>
+        
+        <button id="vgen-start-request" class="vgen-btn-primary" disabled style="opacity: 0.7;">
+          <span data-i18n="commissions_start_request">Start Request</span>
+        </button>
+        
+        <div style="margin-top: 20px; text-align: center;">
+            <a href="admin.html" style="color: rgba(255,255,255,0.3); text-decoration: none; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px; transition: color 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 12px; height: 12px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              Admin Login
+            </a>
+        </div>
+        
+        <input type="hidden" id="chat-username" value="Guest">
+        <input type="hidden" id="chat-user-id" value="">
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./main.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

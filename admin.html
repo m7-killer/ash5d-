@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASH Admin Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* Admin specific styles */
+    body { background: #050505; color: #fff; margin: 0; display: flex; height: 100vh; overflow: hidden; font-family: 'Outfit', sans-serif; }
+    .admin-sidebar { width: 250px; background: rgba(255,255,255,0.02); border-right: 1px solid rgba(255,255,255,0.05); padding: 20px; display: flex; flex-direction: column; }
+    .admin-logo { font-size: 1.5rem; font-weight: 800; margin-bottom: 40px; display: flex; align-items: center; gap: 10px; color: var(--primary); }
+    .nav-link { display: flex; align-items: center; gap: 12px; padding: 12px 15px; border-radius: 8px; color: #a1a1aa; text-decoration: none; transition: 0.3s; margin-bottom: 5px; }
+    .nav-link:hover, .nav-link.active { background: rgba(255,255,255,0.05); color: #fff; }
+    .nav-link.active { border-left: 3px solid var(--primary); }
+    .admin-main { flex: 1; padding: 40px; overflow-y: auto; }
+    .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+    .stat-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 40px; }
+    .stat-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 20px; display: flex; align-items: center; gap: 20px; }
+    .stat-icon { width: 50px; height: 50px; border-radius: 12px; background: rgba(255,0,128,0.1); color: var(--primary); display: flex; align-items: center; justify-content: center; }
+    .stat-info h4 { margin: 0; color: #a1a1aa; font-weight: 400; font-size: 0.9rem; }
+    .stat-info h2 { margin: 5px 0 0 0; font-size: 1.8rem; }
+    .recent-commissions { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 20px; }
+    .recent-commissions h3 { margin-top: 0; margin-bottom: 20px; }
+    .commission-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .commission-item:last-child { border-bottom: none; }
+    .comm-user { display: flex; align-items: center; gap: 15px; }
+    .comm-avatar { width: 40px; height: 40px; border-radius: 50%; background: #333; display: flex; align-items: center; justify-content: center; font-weight: bold;}
+    .comm-details h4 { margin: 0; }
+    .comm-details p { margin: 5px 0 0 0; font-size: 0.8rem; color: #a1a1aa; }
+    .comm-status { padding: 5px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+    .status-pending { background: rgba(255, 165, 0, 0.2); color: orange; }
+    
+    /* Login Overlay */
+    #admin-login-overlay { position: fixed; inset: 0; background: #050505; z-index: 1000; display: flex; align-items: center; justify-content: center; flex-direction: column; transition: opacity 0.3s; }
+    .login-box { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 40px; border-radius: 16px; text-align: center; width: 100%; max-width: 400px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+    .login-input { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; color: #fff; margin-bottom: 20px; outline: none; transition: 0.3s; box-sizing: border-box;}
+    .login-input:focus { border-color: var(--primary); }
+    .login-btn { background: var(--primary); color: #fff; border: none; padding: 15px; width: 100%; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; box-sizing: border-box;}
+    .login-btn:hover { background: #ff3399; }
+  </style>
+</head>
+<body>
+
+  <!-- Login Protection -->
+  <div id="admin-login-overlay">
+    <div class="login-box">
+      <h2 style="margin-top: 0; margin-bottom: 30px;" data-i18n="login_access">Admin Access</h2>
+      <input type="password" id="admin-password" class="login-input" placeholder="Enter Password" data-i18n-placeholder="placeholder_pass">
+      <button id="admin-login-btn" class="login-btn" data-i18n="login_btn">Login</button>
+      <p id="login-error" style="color: #ff3333; display: none; margin-top: 15px; font-size: 0.9rem;" data-i18n="invalid_pass">Invalid password</p>
+    </div>
+  </div>
+
+  <div class="admin-sidebar">
+    <div class="admin-logo">
+      <i data-lucide="shield"></i> ASH Admin
+    </div>
+    <a href="#" id="nav-dashboard" class="nav-link active"><i data-lucide="layout-dashboard"></i> <span data-i18n="nav_dashboard">Dashboard</span></a>
+    <a href="#" id="nav-commissions" class="nav-link"><i data-lucide="palette"></i> <span data-i18n="nav_commissions">Commissions</span></a>
+    <a href="#" id="nav-gallery" class="nav-link"><i data-lucide="image"></i> <span data-i18n="nav_gallery">Gallery Config</span></a>
+
+    <div style="flex: 1;"></div>
+    <a href="index.html" class="nav-link"><i data-lucide="log-out"></i> <span data-i18n="nav_back">Back to Site</span></a>
+  </div>
+
+  <div class="admin-main">
+    <div class="admin-header">
+      <h2 id="header-title" data-i18n="header_dashboard">Dashboard Overview</h2>
+      <div style="display: flex; align-items: center; gap: 20px;">
+        <button id="lang-btn" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 8px 15px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: 0.3s;">
+          <i data-lucide="languages" style="width: 18px; height: 18px;"></i>
+          <span id="lang-text">EN</span>
+        </button>
+        <div style="text-align: right;">
+          <h4 style="margin: 0;">m_7i</h4>
+          <p style="margin: 0; font-size: 0.8rem; color: #a1a1aa;">Super Admin</p>
+        </div>
+        <div style="width: 45px; height: 45px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: bold;">
+          M
+        </div>
+      </div>
+    </div>
+
+    <!-- DASHBOARD TAB -->
+    <div id="dashboard-tab">
+        <div class="stat-cards">
+          <div class="stat-card">
+            <div class="stat-icon"><i data-lucide="users"></i></div>
+            <div class="stat-info">
+              <h4 data-i18n="stat_visitors">Total Visitors</h4>
+              <h2>0</h2>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i data-lucide="dollar-sign"></i></div>
+            <div class="stat-info">
+              <h4 data-i18n="stat_earnings">Commissions Earned</h4>
+              <h2>$0</h2>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i data-lucide="inbox"></i></div>
+            <div class="stat-info">
+              <h4 data-i18n="stat_pending">Pending Requests</h4>
+              <h2 id="pending-count">0</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="recent-commissions">
+          <h3 data-i18n="recent_requests">Recent Commission Requests (Live from Discord)</h3>
+          <div id="commissions-list">
+            <div style="padding: 20px; text-align: center; color: #a1a1aa;">Loading requests...</div>
+          </div>
+        </div>
+    </div>
+
+    <!-- COMMISSIONS / CHATS TAB -->
+    <div id="commissions-tab" style="display: none; height: calc(100vh - 150px);">
+        <div style="display: flex; height: 100%; gap: 20px;">
+            <!-- Active Chats List -->
+            <div style="width: 300px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; display: flex; flex-direction: column;">
+                <h3 style="padding: 20px; margin: 0; border-bottom: 1px solid rgba(255,255,255,0.05);" data-i18n="active_customers">Active Customers</h3>
+                <div id="active-chats-list" style="flex: 1; overflow-y: auto;">
+                    <div style="padding: 20px; text-align: center; color: #a1a1aa;">Loading database chats...</div>
+                </div>
+            </div>
+            
+            <!-- Chat Window -->
+            <div style="flex: 1; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; display: flex; flex-direction: column;">
+                <h3 id="admin-chat-header" style="padding: 20px; margin: 0; border-bottom: 1px solid rgba(255,255,255,0.05);" data-i18n="select_customer">Select a Customer</h3>
+                <div id="admin-chat-messages" style="flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 15px;">
+                    <div style="text-align:center; color: #a1a1aa; margin-top: 50px;">Select a customer on the left to view their persistent chat history.</div>
+                </div>
+                <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.05); background: #09090b; display: flex; gap: 10px; border-radius: 0 0 12px 12px;">
+                    <input type="text" id="admin-chat-input" style="flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 12px 15px; color: #fff; outline: none; transition: 0.3s;" placeholder="Type a reply..." data-i18n-placeholder="placeholder_reply" disabled>
+                    <button id="admin-chat-send" style="background: var(--primary); color: #fff; border: none; padding: 0 20px; border-radius: 8px; cursor: pointer; transition: 0.3s;" disabled><i data-lucide="send" style="width: 18px; height: 18px;"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GALLERY CONFIG TAB -->
+    <div id="gallery-tab" style="display: none;">
+        <div class="recent-commissions">
+            <h3 style="margin-bottom: 30px;" data-i18n="gallery_config_title">Gallery & Pricing Configuration</h3>
+            
+            <!-- Commission Status Control -->
+            <div style="margin-bottom: 40px; padding: 25px; background: rgba(255,255,255,0.02); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h4 style="color: var(--primary); margin-bottom: 5px; font-size: 1.2rem;" data-i18n="comm_status">Commission Status</h4>
+                    <p style="font-size: 0.95rem; color: #a1a1aa;" data-i18n="comm_status_desc">Control whether your commissions are currently OPEN or CLOSED across the entire website.</p>
+                </div>
+                <button id="commission-status-btn" data-status="open" style="width: 160px; padding: 12px; border-radius: 8px; border: none; font-weight: 800; font-size: 1rem; cursor: pointer; transition: 0.3s; background: #22c55e; color: #000;">
+                    OPEN
+                </button>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px;">
+                <!-- Pricing Slots -->
+                <div>
+                    <h4 style="color: var(--primary); margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                        <i data-lucide="list-plus" style="width: 20px;"></i> <span data-i18n="pricing_options">Pricing Options (Slots)</span>
+                    </h4>
+                    <div id="config-slots-list" style="display: flex; flex-direction: column; gap: 15px;">
+                        <!-- Dynamic slots here -->
+                    </div>
+                    <button id="add-slot-btn" class="login-btn" style="margin-top: 20px; background: rgba(255,255,255,0.03); border: 1px dashed rgba(255,255,255,0.2); height: 50px;" data-i18n="add_slot">+ Add New Pricing Slot</button>
+                </div>
+
+                <!-- Gallery Images -->
+                <div>
+                    <h4 style="color: var(--primary); margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                        <i data-lucide="image-plus" style="width: 20px;"></i> <span data-i18n="gallery_images">Gallery Images</span>
+                    </h4>
+                    <div id="config-images-list" style="display: flex; flex-direction: column; gap: 15px;">
+                        <!-- Dynamic images here -->
+                    </div>
+                    <button id="add-image-btn" class="login-btn" style="margin-top: 20px; background: rgba(255,255,255,0.03); border: 1px dashed rgba(255,255,255,0.2); height: 50px;" data-i18n="add_image">+ Add Image URL</button>
+                </div>
+            </div>
+
+            <div style="margin-top: 50px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); text-align: right;">
+                <button id="save-config-btn" class="login-btn" style="width: auto; padding: 15px 40px; background: var(--primary);" data-i18n="save_all">Save All Changes</button>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <script>
+    // Load icons immediately
+    lucide.createIcons();
+
+    // Simple Admin Login (Moved outside module so it works even if tested locally without a server)
+    const loginBtn = document.getElementById('admin-login-btn');
+    const passInput = document.getElementById('admin-password');
+    const overlay = document.getElementById('admin-login-overlay');
+    const errorMsg = document.getElementById('login-error');
+
+    const ADMIN_PASS = "admin123"; 
+
+    function tryLogin() {
+      if (passInput.value === ADMIN_PASS) {
+        overlay.style.opacity = '0';
+        setTimeout(() => overlay.style.display = 'none', 300);
+        // Tell the database script to start loading
+        window.dispatchEvent(new Event('startDashboardLoad'));
+      } else {
+        errorMsg.style.display = 'block';
+      }
+    }
+
+    loginBtn.addEventListener('click', tryLogin);
+    passInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') tryLogin(); });
+  </script>
+
+  <script type="module">
+    import { fetchAdminStats, listenToCommissions, listenToAllActiveChats, listenToUserChat, sendChatMessage, saveCommissionConfig, loadCommissionConfig, isDbActive } from './db.js';
+
+    window.addEventListener('startDashboardLoad', async () => {
+        loadDashboard();
+    });
+
+    const navDashboard = document.getElementById('nav-dashboard');
+    const navCommissions = document.getElementById('nav-commissions');
+    const navGallery = document.getElementById('nav-gallery');
+    const tabDashboard = document.getElementById('dashboard-tab');
+    const tabCommissions = document.getElementById('commissions-tab');
+    const tabGallery = document.getElementById('gallery-tab');
+    const headerTitle = document.getElementById('header-title');
+
+    function switchTab(activeNav, activeTab, titleKey) {
+        [navDashboard, navCommissions, navGallery].forEach(nav => nav.classList.remove('active'));
+        [tabDashboard, tabCommissions, tabGallery].forEach(tab => tab.style.display = 'none');
+        activeNav.classList.add('active');
+        activeTab.style.display = 'block';
+        updateTranslations();
+    }
+
+    navDashboard.addEventListener('click', (e) => { e.preventDefault(); switchTab(navDashboard, tabDashboard, 'header_dashboard'); });
+    navCommissions.addEventListener('click', (e) => { e.preventDefault(); switchTab(navCommissions, tabCommissions, 'header_commissions'); });
+    navGallery.addEventListener('click', (e) => { e.preventDefault(); switchTab(navGallery, tabGallery, 'header_gallery'); loadGalleryConfigUI(); });
+
+    async function loadDashboard() {
+        if (isDbActive) {
+            // Fetch real DB stats
+            const stats = await fetchAdminStats();
+            document.querySelector('.stat-cards .stat-card:nth-child(1) h2').textContent = stats.visitors.toLocaleString();
+            document.querySelector('.stat-cards .stat-card:nth-child(2) h2').textContent = "$" + stats.earnings.toLocaleString();
+
+            // Listen to real DB commissions
+            listenToCommissions((commissions) => {
+                const commissionsList = document.getElementById('commissions-list');
+                const pendingCount = document.getElementById('pending-count');
+                
+                commissionsList.innerHTML = ''; 
+                pendingCount.textContent = commissions.length;
+
+                if (commissions.length === 0) {
+                commissionsList.innerHTML = '<div style="padding: 20px; text-align: center; color: #a1a1aa;">No pending commission requests found.</div>';
+                    return;
+                }
+
+                commissions.forEach(msg => {
+                    const date = new Date(msg.createdAt).toLocaleString();
+                    const div = document.createElement('div');
+                    div.className = 'commission-item';
+                    div.innerHTML = `
+                        <div class="comm-user">
+                            <div class="comm-avatar">${msg.username.charAt(0).toUpperCase()}</div>
+                            <div class="comm-details">
+                                <h4>${msg.username}</h4>
+                                <p>Requested: ${msg.options} • ${date}</p>
+                            </div>
+                        </div>
+                        <div class="comm-actions">
+                            <span class="comm-status status-pending">${msg.status}</span>
+                        </div>
+                    `;
+                    commissionsList.appendChild(div);
+                });
+            });
+
+            // Firebase Admin Chat Logic
+            let activeChatId = null;
+            let activeChatUsername = null;
+            let currentChatUnsubscribe = null;
+
+            listenToAllActiveChats((chats) => {
+                const list = document.getElementById('active-chats-list');
+                list.innerHTML = '';
+                if(chats.length === 0) {
+                    list.innerHTML = '<div style="padding: 20px; text-align: center; color: #a1a1aa;">No active chats found.</div>';
+                    return;
+                }
+                
+                chats.forEach(chat => {
+                    const div = document.createElement('div');
+                    div.style.cssText = `padding: 15px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer; transition: 0.3s; ${activeChatId === chat.id ? 'background: rgba(255,255,255,0.05);' : ''}`;
+                    div.onmouseover = () => div.style.background = 'rgba(255,255,255,0.05)';
+                    div.onmouseout = () => { if(activeChatId !== chat.id) div.style.background = 'transparent'; };
+                    
+                    div.innerHTML = `
+                        <div style="font-weight: bold; margin-bottom: 5px;">${chat.lastUsername || 'Customer'}</div>
+                        <div style="font-size: 0.8rem; color: #a1a1aa;">Updated: ${new Date(chat.lastUpdated).toLocaleDateString()}</div>
+                    `;
+                    
+                    div.addEventListener('click', () => {
+                        // Highlight selection
+                        Array.from(list.children).forEach(c => c.style.background = 'transparent');
+                        div.style.background = 'rgba(255,255,255,0.05)';
+                        
+                        activeChatId = chat.id;
+                        activeChatUsername = chat.lastUsername;
+                        document.getElementById('admin-chat-header').textContent = `Chat with ${chat.lastUsername}`;
+                        document.getElementById('admin-chat-input').disabled = false;
+                        document.getElementById('admin-chat-send').disabled = false;
+                        
+                        if(currentChatUnsubscribe) currentChatUnsubscribe();
+                        
+                        currentChatUnsubscribe = listenToUserChat(activeChatId, (messages) => {
+                            const container = document.getElementById('admin-chat-messages');
+                            container.innerHTML = '';
+                            messages.forEach(msg => {
+                                const msgDiv = document.createElement('div');
+                                msgDiv.style.cssText = `max-width: 80%; padding: 12px 16px; border-radius: 12px; font-size: 0.95rem; line-height: 1.4; word-break: break-word;`;
+                                if(msg.isAdmin) {
+                                    msgDiv.style.background = 'rgba(255,0,128,0.1)';
+                                    msgDiv.style.border = '1px solid var(--primary)';
+                                    msgDiv.style.alignSelf = 'flex-end';
+                                    msgDiv.style.borderBottomRightRadius = '4px';
+                                } else {
+                                    msgDiv.style.background = 'rgba(255,255,255,0.05)';
+                                    msgDiv.style.border = '1px solid rgba(255,255,255,0.1)';
+                                    msgDiv.style.alignSelf = 'flex-start';
+                                    msgDiv.style.borderBottomLeftRadius = '4px';
+                                }
+                                msgDiv.innerHTML = `<div style="font-size: 0.75rem; font-weight: bold; margin-bottom: 5px; opacity: 0.7;">${msg.isAdmin ? 'You' : msg.username}</div>${msg.text}`;
+                                container.appendChild(msgDiv);
+                            });
+                            container.scrollTop = container.scrollHeight;
+                        });
+                    });
+                    list.appendChild(div);
+                });
+            });
+
+            // Admin Send Message Logic
+            const adminInput = document.getElementById('admin-chat-input');
+            const adminSend = document.getElementById('admin-chat-send');
+            
+            async function sendAdminMessage() {
+                const text = adminInput.value.trim();
+                if(text && activeChatId) {
+                    adminInput.value = '';
+                    await sendChatMessage(activeChatId, 'ASH Admin', text, true);
+                }
+            }
+            
+            adminSend.addEventListener('click', sendAdminMessage);
+            adminInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') sendAdminMessage(); });
+
+        } else {
+            console.warn("Database not active, falling back to Discord API for Dashboard");
+            fetchDiscordCommissions();
+        }
+    }
+
+    // Fallback: Fetch live commissions directly from Discord (if Firebase isn't configured)
+    const DISCORD_CHANNEL_ID = '1497990868001357825';
+    const DISCORD_BOT_TOKEN = 'MTQ1ODE2NTY3Nzk4NTc2MzQ3NA.GMm2Ng.tHYFVU6lar7PHyOrcsI7AZdp8frZrmBTC_hxps';
+    const CORS_PROXY = 'https://corsproxy.io/?url=';
+
+    async function fetchDiscordCommissions() {
+        try {
+            const apiTarget = `https://discord.com/api/v10/channels/${DISCORD_CHANNEL_ID}/messages?limit=20`;
+            const url = `${CORS_PROXY}${encodeURIComponent(apiTarget)}`;
+            
+            const response = await fetch(url, {
+                headers: { 'Authorization': `Bot ${DISCORD_BOT_TOKEN}` }
+            });
+            
+            if (response.ok) {
+                const messages = await response.json();
+                const commissionsList = document.getElementById('commissions-list');
+                const pendingCount = document.getElementById('pending-count');
+                
+                commissionsList.innerHTML = ''; // Clear loading
+                let count = 0;
+
+                messages.forEach(msg => {
+                    if (msg.author.username === "ASH Commission Bot" && msg.content.includes("[COMMISSION]")) {
+                        count++;
+                        const userMatch = msg.content.match(/\(User: (.*?)\)/);
+                        const optionsMatch = msg.content.match(/Options: (.*?) Emote\(s\)/);
+                        
+                        const reqUser = userMatch ? userMatch[1] : 'Unknown User';
+                        const reqDetails = optionsMatch ? optionsMatch[1] + " Emotes" : 'Details not found';
+                        const date = new Date(msg.timestamp).toLocaleString();
+
+                        const div = document.createElement('div');
+                        div.className = 'commission-item';
+                        div.innerHTML = `
+                            <div class="comm-user">
+                                <div class="comm-avatar">${reqUser.charAt(0).toUpperCase()}</div>
+                                <div class="comm-details">
+                                    <h4>${reqUser}</h4>
+                                    <p>Requested: ${reqDetails} • ${date}</p>
+                                </div>
+                            </div>
+                            <div class="comm-actions">
+                                <span class="comm-status status-pending">Pending</span>
+                                <a href="https://discord.com/channels/1204715152851869706/1497990868001357825" target="_blank" style="text-decoration: none; background: rgba(255,255,255,0.1); color: white; padding: 8px 15px; border-radius: 6px; margin-left: 10px; font-size: 0.9rem;">View in Discord</a>
+                            </div>
+                        `;
+                        commissionsList.appendChild(div);
+                    }
+                });
+
+                pendingCount.textContent = count;
+                if (count === 0) {
+                    commissionsList.innerHTML = '<div style="padding: 20px; text-align: center; color: #a1a1aa;">No pending commission requests found.</div>';
+                }
+            }
+        } catch (error) {
+            console.error("Failed to fetch commissions", error);
+            document.getElementById('commissions-list').innerHTML = '<div style="padding: 20px; text-align: center; color: #ff3333;">Error loading data from Discord. CORS proxy might be down.</div>';
+        }
+    }
+
+    // If using Firebase, we do not need fetchAllDiscordChats on load.
+    // We already load active Firebase chats.
+    // GALLERY CONFIG UI LOGIC
+    const slotsList = document.getElementById('config-slots-list');
+    const imagesList = document.getElementById('config-images-list');
+    const addSlotBtn = document.getElementById('add-slot-btn');
+    const addImageBtn = document.getElementById('add-image-btn');
+    const saveConfigBtn = document.getElementById('save-config-btn');
+
+    async function loadGalleryConfigUI() {
+        if (!isDbActive) return;
+        const config = await loadCommissionConfig() || { 
+            slots: [
+                { label: '1 Emote', price: 20, value: '1' },
+                { label: '3 Emotes', price: 60, value: '3' },
+                { label: '5 Emotes', price: 100, value: '5' },
+                { label: 'Custom Number Emote', price: 20, value: 'custom' }
+            ],
+            images: ['https://i.postimg.cc/hg1vHDjC/image-2026-04-26-120653466.png']
+        };
+
+        const commissionStatusBtn = document.getElementById('commission-status-btn');
+        const isOpen = config.isCommissionsOpen !== false; // true by default
+
+        if (isOpen) {
+            commissionStatusBtn.setAttribute('data-status', 'open');
+            commissionStatusBtn.textContent = 'OPEN';
+            commissionStatusBtn.style.background = '#22c55e';
+        } else {
+            commissionStatusBtn.setAttribute('data-status', 'closed');
+            commissionStatusBtn.textContent = 'CLOSED';
+            commissionStatusBtn.style.background = '#ef4444';
+        }
+
+        renderSlots(config.slots);
+        renderImages(config.images);
+    }
+
+    function renderSlots(slots) {
+        slotsList.innerHTML = '';
+        slots.forEach((slot, index) => {
+            const div = document.createElement('div');
+            div.style.cssText = 'display: flex; gap: 10px; align-items: center; background: rgba(255,255,255,0.02); padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);';
+            div.innerHTML = `
+                <input type="text" value="${slot.label}" placeholder="Label (e.g. 1 Emote)" style="flex: 1; background: transparent; border: none; color: #fff; outline: none;">
+                <input type="number" value="${slot.price}" placeholder="Price" style="width: 70px; background: transparent; border: none; color: #fff; outline: none; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 10px;">
+                <button onclick="this.parentElement.remove()" style="background: transparent; border: none; color: #ff3333; cursor: pointer;"><i data-lucide="trash-2" style="width: 18px;"></i></button>
+            `;
+            slotsList.appendChild(div);
+        });
+        lucide.createIcons();
+    }
+
+    function renderImages(images) {
+        imagesList.innerHTML = '';
+        images.forEach((url, index) => {
+            const div = document.createElement('div');
+            div.style.cssText = 'display: flex; gap: 10px; align-items: center; background: rgba(255,255,255,0.02); padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);';
+            div.innerHTML = `
+                <img src="${url}" style="width: 40px; height: 40px; border-radius: 4px; object-fit: cover;">
+                <input type="text" value="${url}" placeholder="Image URL" style="flex: 1; background: transparent; border: none; color: #fff; outline: none; font-size: 0.8rem;">
+                <button onclick="this.parentElement.remove()" style="background: transparent; border: none; color: #ff3333; cursor: pointer;"><i data-lucide="trash-2" style="width: 18px;"></i></button>
+            `;
+            imagesList.appendChild(div);
+        });
+        lucide.createIcons();
+    }
+
+    addSlotBtn.addEventListener('click', () => {
+        const div = document.createElement('div');
+        div.style.cssText = 'display: flex; gap: 10px; align-items: center; background: rgba(255,255,255,0.02); padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);';
+        div.innerHTML = `
+            <input type="text" placeholder="Label" style="flex: 1; background: transparent; border: none; color: #fff; outline: none;">
+            <input type="number" placeholder="Price" style="width: 70px; background: transparent; border: none; color: #fff; outline: none; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 10px;">
+            <button onclick="this.parentElement.remove()" style="background: transparent; border: none; color: #ff3333; cursor: pointer;"><i data-lucide="trash-2" style="width: 18px;"></i></button>
+        `;
+        slotsList.appendChild(div);
+        lucide.createIcons();
+    });
+
+    addImageBtn.addEventListener('click', () => {
+        const div = document.createElement('div');
+        div.style.cssText = 'display: flex; gap: 10px; align-items: center; background: rgba(255,255,255,0.02); padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);';
+        div.innerHTML = `
+            <div style="width: 40px; height: 40px; border-radius: 4px; background: #333; display: flex; align-items: center; justify-content: center;"><i data-lucide="image" style="width: 18px;"></i></div>
+            <input type="text" placeholder="Image URL" style="flex: 1; background: transparent; border: none; color: #fff; outline: none; font-size: 0.8rem;">
+            <button onclick="this.parentElement.remove()" style="background: transparent; border: none; color: #ff3333; cursor: pointer;"><i data-lucide="trash-2" style="width: 18px;"></i></button>
+        `;
+        imagesList.appendChild(div);
+        lucide.createIcons();
+    });
+
+    const commissionStatusBtn = document.getElementById('commission-status-btn');
+    commissionStatusBtn.addEventListener('click', async () => {
+        const currentStatus = commissionStatusBtn.getAttribute('data-status');
+        let newStatus = 'open';
+        
+        if (currentStatus === 'open') {
+            newStatus = 'closed';
+            commissionStatusBtn.setAttribute('data-status', 'closed');
+            commissionStatusBtn.textContent = 'Saving...';
+            commissionStatusBtn.style.background = '#ef4444';
+        } else {
+            newStatus = 'open';
+            commissionStatusBtn.setAttribute('data-status', 'open');
+            commissionStatusBtn.textContent = 'Saving...';
+            commissionStatusBtn.style.background = '#22c55e';
+        }
+
+        // Grab current form data to prevent accidental overwrite
+        const slots = Array.from(slotsList.children).map(div => ({
+            label: div.querySelectorAll('input')[0].value || 'New Option',
+            price: parseInt(div.querySelectorAll('input')[1].value) || 0,
+            value: div.querySelectorAll('input')[0].value.replace(/\D/g,'') || '1'
+        }));
+        const images = Array.from(imagesList.children).map(div => div.querySelector('input').value || '');
+
+        // Instantly save to Firebase
+        await saveCommissionConfig({ slots, images, isCommissionsOpen: newStatus === 'open' });
+        
+        // Restore text
+        commissionStatusBtn.textContent = newStatus === 'open' ? 'OPEN' : 'CLOSED';
+    });
+
+    saveConfigBtn.addEventListener('click', async () => {
+        const slots = Array.from(slotsList.children).map(div => ({
+            label: div.querySelectorAll('input')[0].value || 'New Option',
+            price: parseInt(div.querySelectorAll('input')[1].value) || 0,
+            value: div.querySelectorAll('input')[0].value.replace(/\D/g,'') || '1'
+        }));
+        const images = Array.from(imagesList.children).map(div => div.querySelector('input').value || '');
+        const isCommissionsOpen = document.getElementById('commission-status-btn').getAttribute('data-status') === 'open';
+
+        saveConfigBtn.textContent = 'Saving...';
+        const success = await saveCommissionConfig({ slots, images, isCommissionsOpen });
+        saveConfigBtn.textContent = success ? 'Saved Successfully!' : 'Error Saving';
+        setTimeout(() => saveConfigBtn.textContent = 'Save All Changes', 2000);
+    });
+
+    // Translation Logic
+    const dashboardTranslations = {
+        ar: {
+            nav_dashboard: 'لوحة التحكم',
+            nav_commissions: 'الطلبات',
+            nav_gallery: 'إعدادات المعرض',
+            nav_back: 'العودة للموقع',
+            header_dashboard: 'نظرة عامة على لوحة التحكم',
+            header_commissions: 'المحادثات / الطلبات',
+            header_gallery: 'إعدادات المعرض والأسعار',
+            stat_visitors: 'إجمالي الزوار',
+            stat_earnings: 'الأرباح المكتسبة',
+            stat_pending: 'الطلبات المعلقة',
+            recent_requests: 'طلبات العملاء الأخيرة (مباشر من ديسكورد)',
+            active_customers: 'العملاء النشطون',
+            select_customer: 'اختر عميلاً',
+            gallery_config_title: 'إعدادات المعرض والأسعار',
+            comm_status: 'حالة الطلبات',
+            comm_status_desc: 'تحكم في ما إذا كانت طلباتك مفتوحة أو مغلقة حالياً في الموقع بالكامل.',
+            pricing_options: 'خيارات الأسعار (الخانات)',
+            add_slot: '+ إضافة خانة سعر جديدة',
+            gallery_images: 'صور المعرض',
+            add_image: '+ إضافة رابط صورة',
+            save_all: 'حفظ جميع التغييرات',
+            login_access: 'دخول المسؤول',
+            login_btn: 'تسجيل الدخول',
+            invalid_pass: 'كلمة مرور غير صالحة',
+            placeholder_pass: 'أدخل كلمة المرور',
+            placeholder_reply: 'اكتب رداً...',
+            placeholder_label: 'الاسم (مثلاً: 1 إيموت)',
+            placeholder_price: 'السعر',
+            placeholder_url: 'رابط الصورة'
+        },
+        en: {
+            nav_dashboard: 'Dashboard',
+            nav_commissions: 'Commissions',
+            nav_gallery: 'Gallery Config',
+            nav_back: 'Back to Site',
+            header_dashboard: 'Dashboard Overview',
+            header_commissions: 'Chats / Commissions',
+            header_gallery: 'Gallery & Pricing Config',
+            stat_visitors: 'Total Visitors',
+            stat_earnings: 'Commissions Earned',
+            stat_pending: 'Pending Requests',
+            recent_requests: 'Recent Commission Requests (Live from Discord)',
+            active_customers: 'Active Customers',
+            select_customer: 'Select a Customer',
+            gallery_config_title: 'Gallery & Pricing Configuration',
+            comm_status: 'Commission Status',
+            comm_status_desc: 'Control whether your commissions are currently OPEN or CLOSED across the entire website.',
+            pricing_options: 'Pricing Options (Slots)',
+            add_slot: '+ Add New Pricing Slot',
+            gallery_images: 'Gallery Images',
+            add_image: '+ Add Image URL',
+            save_all: 'Save All Changes',
+            login_access: 'Admin Access',
+            login_btn: 'Login',
+            invalid_pass: 'Invalid password',
+            placeholder_pass: 'Enter Password',
+            placeholder_reply: 'Type a reply...',
+            placeholder_label: 'Label (e.g. 1 Emote)',
+            placeholder_price: 'Price',
+            placeholder_url: 'Image URL'
+        }
+    };
+
+    let currentLang = localStorage.getItem('ash_admin_lang') || 'en';
+
+    function updateTranslations() {
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (dashboardTranslations[currentLang][key]) {
+                el.textContent = dashboardTranslations[currentLang][key];
+            }
+        });
+
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-i18n-placeholder');
+            if (dashboardTranslations[currentLang][key]) {
+                el.setAttribute('placeholder', dashboardTranslations[currentLang][key]);
+            }
+        });
+
+        document.getElementById('lang-text').textContent = currentLang.toUpperCase();
+        document.body.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+        
+        // Update specific dynamic elements if needed
+        const headerTitle = document.getElementById('header-title');
+        const activeNav = document.querySelector('.nav-link.active');
+        if (activeNav) {
+            const navId = activeNav.id;
+            const titleMap = {
+                'nav-dashboard': 'header_dashboard',
+                'nav-commissions': 'header_commissions',
+                'nav-gallery': 'header_gallery'
+            };
+            if (titleMap[navId]) {
+                headerTitle.textContent = dashboardTranslations[currentLang][titleMap[navId]];
+            }
+        }
+    }
+
+    const langBtn = document.getElementById('lang-btn');
+    langBtn.addEventListener('click', () => {
+        currentLang = currentLang === 'en' ? 'ar' : 'en';
+        localStorage.setItem('ash_admin_lang', currentLang);
+        updateTranslations();
+    });
+
+    // Initial translation
+    updateTranslations();
+  </script>
+</body>
+</html>
